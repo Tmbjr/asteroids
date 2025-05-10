@@ -1,3 +1,6 @@
+import pygame
+pygame.mixer.init()     
+
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 
@@ -11,6 +14,10 @@ PLAYER_RADIUS = 20
 PLAYER_TURN_SPEED = 300
 PLAYER_SPEED = 200
 PLAYER_SHOOT_SPEED = 500
-PLAYER_SHOOT_COOLDOWN = 0.3
+PLAYER_SHOOT_COOLDOWN = 0.30
 
 SHOT_RADIUS = 5
+
+SHOOT_SOUND = pygame.mixer.Sound("sounds/shoot2.wav")
+EXPLOSION_SOUND = pygame.mixer.Sound("sounds/explosion.wav")
+SPLIT_SOUND = pygame.mixer.Sound("sounds/split.wav") 

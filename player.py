@@ -56,3 +56,5 @@ class Player(CircleShape):
         velocity = rotated * PLAYER_SHOOT_SPEED
 
         new_shot.velocity = velocity
+        SHOOT_SOUND.play()
+        SHOOT_SOUND.set_volume(0.4) 

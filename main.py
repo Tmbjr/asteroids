@@ -10,7 +10,8 @@ def main():
     print("Screen width: 1280")
     print("Screen height: 720")
     pygame.init()
-    
+    pygame.mixer.init()
+     
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
     clock = pygame.time.Clock()
