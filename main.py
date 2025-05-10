@@ -44,11 +44,22 @@ def main():
 
         for powerup in powerups:
             if powerup.collision_check(player):
-                player.power_timer = 5
                 powerup.kill()
 
+                if powerup.type == "rapid":
+                    player.rapid_timer = 5
+                    RAPID_SOUND.play()
+                elif powerup.type == "shield":
+                    player.shield_timer = 10
+                    SHIELD_SOUND.play()
+                    HUM_SOUND.play()
+                elif powerup.type == "super":
+                    player.super_timer = 5
+                    
         for asteroid in asteroids:
-            if asteroid.collision_check(player):
+            if asteroid.collision_check(player) and player.shield_timer > 0:
+                asteroid.split()
+            elif asteroid.collision_check(player):
                 print("Game over!")
                 return
            

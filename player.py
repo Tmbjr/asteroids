@@ -8,8 +8,10 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.timer = 0
-        self.power_timer = 0
-        
+        self.rapid_timer = 0
+        self.shield_timer = 0
+        self.super_timer = 0
+
     # in the player class
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -21,15 +23,22 @@ class Player(CircleShape):
 
     def draw(self, screen):
         pygame.draw.polygon(screen, WHITE, self.triangle(), 2)
+        if self.shield_timer > 0:
+            pygame.draw.circle(screen, GREEN, self.position, SHIELD_RADIUS, 2)
 
     def rotate(self, delta_time):
         self.rotation += PLAYER_TURN_SPEED * delta_time
 
 
     def update(self, dt):
-        if self.power_timer > 0:
+        if self.rapid_timer > 0:
             self.timer -= (dt * 2)
-            self.power_timer -= dt
+            self.rapid_timer -= dt
+        elif self.shield_timer > 0:
+            self.shield_timer -= dt
+            self.timer -= dt
+        elif self.super_timer > 0:
+            self.super_timer -= dt
         else:
             self.timer -= dt
             

@@ -40,7 +40,10 @@ class AsteroidField(pygame.sprite.Sprite):
             asteroid = Asteroid(position.x, position.y, radius)
             asteroid.velocity = velocity
         elif type == "powerup":
-            powerup = Powerup(position.x, position.y, radius, "rapid")
+            
+            #rand_type = random.randint(0, 2)
+
+            powerup = Powerup(position.x, position.y, radius, 1)
             powerup.velocity = velocity
 
     def update(self, dt):

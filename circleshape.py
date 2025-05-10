@@ -1,4 +1,5 @@
 import pygame
+from constants import *
 
 # Base class for game objects
 class CircleShape(pygame.sprite.Sprite):
@@ -23,4 +24,8 @@ class CircleShape(pygame.sprite.Sprite):
 
     def collision_check(self, other):
         distance = self.radius + other.radius
+
+        if hasattr(other, "shield_timer") and other.shield_timer > 0:
+            distance = self.radius + SHIELD_RADIUS
+
         return pygame.math.Vector2.distance_to(self.position, other.position) <= distance
