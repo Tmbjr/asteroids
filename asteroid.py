@@ -9,7 +9,7 @@ class Asteroid(CircleShape):
         super().__init__(x, y, radius)
 
     def draw(self, screen):
-        pygame.draw.circle(screen, (255, 255, 255), self.position, self.radius, 2)
+        pygame.draw.circle(screen, WHITE, self.position, self.radius, 2)
 
     def update(self, dt):
         self.position += (self.velocity * dt)
@@ -17,7 +17,7 @@ class Asteroid(CircleShape):
     def split(self):
         self.kill()
         if self.radius <= ASTEROID_MIN_RADIUS:
-            pygame.mixer.Sound.play(EXPLOSION_SOUND)
+            EXPLOSION_SOUND.play()
             return
         else:
             SPLIT_SOUND.play()

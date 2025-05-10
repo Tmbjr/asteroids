@@ -4,6 +4,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
+from powerups import Powerup
 
 def main():
     print("Starting Asteroids!")
@@ -19,9 +20,11 @@ def main():
 
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    powerups = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
-    
+
+    Powerup.containers = (updatable, drawable, powerups)    
     Shot.containers = (updatable, drawable, shots)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
@@ -35,9 +38,14 @@ def main():
             if event.type == pygame.QUIT:
                 return
     
-        screen.fill((0, 0, 0))
+        screen.fill(BLACK)
     
         updatable.update(dt)
+
+        for powerup in powerups:
+            if powerup.collision_check(player):
+                player.power_timer = 5
+                powerup.kill()
 
         for asteroid in asteroids:
             if asteroid.collision_check(player):

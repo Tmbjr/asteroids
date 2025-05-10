@@ -8,7 +8,8 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.timer = 0
-
+        self.power_timer = 0
+        
     # in the player class
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -19,14 +20,20 @@ class Player(CircleShape):
         return [a, b, c]
 
     def draw(self, screen):
-        pygame.draw.polygon(screen, (255, 255, 255), self.triangle(), 2)
+        pygame.draw.polygon(screen, WHITE, self.triangle(), 2)
 
     def rotate(self, delta_time):
         self.rotation += PLAYER_TURN_SPEED * delta_time
 
 
     def update(self, dt):
-        self.timer -= dt
+        if self.power_timer > 0:
+            self.timer -= (dt * 2)
+            self.power_timer -= dt
+        else:
+            self.timer -= dt
+            
+
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
